@@ -16,3 +16,8 @@ cb = fig.colorbar(im, orientation='horizontal')
 cb.set_ticks([1, 100, 200, 300, 400, 500, 600])
 cb.set_label('Radiance (W m-2 sr-1 um-1)')
 # plt.show() #Remove comment to see the image
+
+#Traer informacion del formato nc
+print g16nc.variables.keys()
+print g16nc.variables[u'y']
+print g16nc.variables[u'y_image_bounds']
