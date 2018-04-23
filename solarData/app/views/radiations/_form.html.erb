@@ -1,0 +1,37 @@
+<%= form_with(model: radiation, local: true) do |form| %>
+  <% if radiation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(radiation.errors.count, "error") %> prohibited this radiation from being saved:</h2>
+
+      <ul>
+      <% radiation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :station %>
+    <%= form.text_field :station, id: :radiation_station %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :radiation_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rad_time %>
+    <%= form.date_select :rad_time, id: :radiation_rad_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :radiation_value %>
+    <%= form.text_field :radiation_value, id: :radiation_radiation_value %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

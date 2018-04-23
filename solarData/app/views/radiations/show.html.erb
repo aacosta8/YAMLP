@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Station:</strong>
+  <%= @radiation.station %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @radiation.name %>
+</p>
+
+<p>
+  <strong>Rad time:</strong>
+  <%= @radiation.rad_time %>
+</p>
+
+<p>
+  <strong>Radiation value:</strong>
+  <%= @radiation.radiation_value %>
+</p>
+
+<%= link_to 'Edit', edit_radiation_path(@radiation) %> |
+<%= link_to 'Back', radiations_path %>

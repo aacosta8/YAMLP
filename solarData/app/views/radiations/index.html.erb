@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Radiations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Station</th>
+      <th>Name</th>
+      <th>Rad time</th>
+      <th>Radiation value</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @radiations.each do |radiation| %>
+      <tr>
+        <td><%= radiation.station %></td>
+        <td><%= radiation.name %></td>
+        <td><%= radiation.rad_time %></td>
+        <td><%= radiation.radiation_value %></td>
+        <td><%= link_to 'Show', radiation %></td>
+        <td><%= link_to 'Edit', edit_radiation_path(radiation) %></td>
+        <td><%= link_to 'Destroy', radiation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Radiation', new_radiation_path %>
