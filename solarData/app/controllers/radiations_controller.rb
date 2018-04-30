@@ -23,9 +23,14 @@ class RadiationsController < ApplicationController
   def energia
 
   end
-  
-  def calcular
 
+  def calcular
+    start = Date.strptime(calcular_params[:start_date], "%m/%d/%Y")
+    end_date = Date.strptime(calcular_params[:end_date], "%m/%d/%Y")
+    rad = Radiation.created_between_est(start, end_date,1)
+    sum = 0
+    rad.each { |r| sum += r.radiation_value.to_f*15}
+    @energia = (sum*calcular_params[:area].to_f*0.15).to_i/100  
   end
 
   # GET /radiations/1
@@ -95,6 +100,10 @@ class RadiationsController < ApplicationController
 
     def busqueda_params
       params.permit(:start_date,:end_date,:estacion)
+    end
+
+    def calcular_params
+      params.permit(:start_date,:end_date,:area,:rendimiento, :lat, :lon)
     end
 
 end

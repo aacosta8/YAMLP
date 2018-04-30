@@ -39,6 +39,16 @@
             </div>
 
         </div>
-        <input type="submit" value="Submit" class="btn">
+        <input type="submit" value="Buscar" class="btn">
     </div>
 </form>
+
+<input name="searchTxt" type="text" maxlength="512" id="searchTxt" class="searchField"/>
+
+<script>
+    var input = document.getElementById("searchTxt");
+
+    function searchURL() {
+         window.location = "http://www.myurl.com/search/" + input.value;
+    }
+</script>
