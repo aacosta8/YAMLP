@@ -4,7 +4,28 @@ class RadiationsController < ApplicationController
   # GET /radiations
   # GET /radiations.json
   def index
-    @radiations = Radiation.all
+    @radiations = Radiation.take(10)
+  end
+
+  def buscar
+    start = Date.strptime(busqueda_params[:start_date], "%m/%d/%Y")
+    end_date = Date.strptime(busqueda_params[:end_date], "%m/%d/%Y")
+    estacion = busqueda_params[:estacion]
+    @radiations = Radiation.created_between_est(start, end_date,estacion)
+    @date = [['Date', 'Radiation']]
+    # ['2017-07-19 11:05:00',  3],['2017-07-19 11:20:00',  18],['2017-07-19 11:35:00',  35],['2017-07-19 11:50:00',  137]
+
+    rad = Radiation.created_between_est(start, end_date,estacion)
+    rad.each { |r| @date << [r.rad_time,r.radiation_value]}
+    gon.date =@date
+  end
+
+  def energia
+
+  end
+  
+  def calcular
+
   end
 
   # GET /radiations/1
@@ -71,4 +92,9 @@ class RadiationsController < ApplicationController
     def radiation_params
       params.require(:radiation).permit(:station, :name, :rad_time, :radiation_value)
     end
+
+    def busqueda_params
+      params.permit(:start_date,:end_date,:estacion)
+    end
+
 end
