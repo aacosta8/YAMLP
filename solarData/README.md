@@ -1,24 +1,19 @@
-# README
+# Radiación Solar Valle Del Aburrá - YAMLP
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Integrantes:
+Alexander Acosta Jiménez,
+Juan Fernando Rincón Cardeño,
+Esteban Salazar Montoya.
 
-Things you may want to cover:
+# Desplegar la aplicación Local
 
-* Ruby version
+* Instalar RVM
+* Instalar Ruby 2.4.0
+* Instalar Rails 5.3.1
+* Instalar Postgres
 
-* System dependencies
+Ejecutar los comando
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* bundle install
+* rake db:drop db:create db:migrate
+* rails server
