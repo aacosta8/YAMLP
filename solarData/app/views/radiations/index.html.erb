@@ -1,33 +1,41 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Radiations</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
-<table>
-  <thead>
-    <tr>
-      <th>Station</th>
-      <th>Name</th>
-      <th>Rad time</th>
-      <th>Radiation value</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="clearfix"></div>
+<div class="w3layouts-clients">
+  <div class="container"></div>
+</div>
+  <div class="container">
+    <h2 class="w3ls_head">Rad<span>iaciones</span></h2>
+    <p>En este lugar puedes consultar como se ha comportado la radición en fechas pasadas.
+    (en esta fase beta podras encontrar información desde: 2017-07-19 hasta: 2017-10-27) </p>
+    <div class="clearfix"></div>
+    
 
-  <tbody>
-    <% @radiations.each do |radiation| %>
-      <tr>
-        <td><%= radiation.station %></td>
-        <td><%= radiation.name %></td>
-        <td><%= radiation.rad_time %></td>
-        <td><%= radiation.radiation_value %></td>
-        <td><%= link_to 'Show', radiation %></td>
-        <td><%= link_to 'Edit', edit_radiation_path(radiation) %></td>
-        <td><%= link_to 'Destroy', radiation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <%= render 'busqueda' %>
 
+    <table id="customers">
+      <thead>
+        <tr>
+          <th>Estación</th>
+          <th>Hora de captura</th>
+          <th>Valor de la radiacón</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @radiations.each do |radiation| %>
+          <tr>
+            <td><%= radiation.station %></td>
+            <td><%= radiation.rad_time.localtime %></td>
+            <td><%= radiation.radiation_value %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="clearfix"></div>
 <br>
-
-<%= link_to 'New Radiation', new_radiation_path %>

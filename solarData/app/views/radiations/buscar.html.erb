@@ -1,3 +1,5 @@
+
+
 <%= include_gon %>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -18,7 +20,29 @@
         chart.draw(data, options);
       }
     </script>
-  <body>
-    <div id="curve_chart" style="width: 1500px; height: 500px"></div>
-    <%=@date%>
-  </body>
+
+<div class="container">
+  <h2 class="w3ls_head">Bus<span>queda</span></h2>
+
+  <div id="curve_chart" style="width:auto; height: 500px"></div>
+
+  <table id="customers">
+    <thead>
+      <tr>
+        <th>Estación</th>
+        <th>Hora de captura</th>
+        <th>Valor de la radiacón</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @radiations.each do |radiation| %>
+        <tr>
+          <td><%= radiation.station %></td>
+          <td><%= radiation.rad_time.localtime %></td>
+          <td><%= radiation.radiation_value %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
