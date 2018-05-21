@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from subprocess import call
 from string import Template
 from netCDF4 import Dataset
@@ -10,12 +8,11 @@ import numpy as np
 
 def downloadFolder(year, day, hour, directory):
 	str = Template("s3://noaa-goes16/ABI-L1b-RadF/$year/$day/$hour")
-	os.system(
-		'aws s3 cp ' + str.substitute(day=day,hour=hour,year=year) + ' . --no-sign-request --endpoint-url https://osdc.rcc.uchicago.edu --no-verify-ssl --recursive --exclude "*" --include "*M3C0[123]?*"'
-		)
-	return True
-	# files = glob.glob("*.nc")
-	# return list(map(cropNC, files))
+	call(
+		'aws s3 cp ' + str.substitute(day=day,hour=hour,year=year) + ' . --no-sign-request --endpoint-url https://osdc.rcc.uchicago.edu --no-verify-ssl --recursive --exclude "*" --include "*M3C0[123]?*"' 
+		, cwd = directory)
+	files = glob.glob("*.nc")
+	return list(map(cropNC, files))
 
 def cropNC(file):
 	rootgrp = Dataset(file, "r", format="NETCDF4")
@@ -32,7 +29,7 @@ def cropNC(file):
 	return 1
 
 def main():
-	pathlib.Path('Crops').mkdir(exist_ok=True)
+	pathlib.Path('Crops').mkdir(exist_ok=True) 
 	for day in range(213, 301):
 		for hour in range(11, 24):
 			downloadFolder(2017, day, hour, os.getcwd())
